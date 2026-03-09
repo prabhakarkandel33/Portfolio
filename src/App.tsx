@@ -1,198 +1,459 @@
-import { useEffect, useState } from 'react'
-import './App.css'
+import { useEffect, useState, useRef } from 'react';
+import { gsap } from 'gsap';
+import './App.css';
 
 function App() {
-  const [loading, setLoading] = useState(true)
-  const [scrolled, setScrolled] = useState(false)
-  const skills = [
+  const [loading, setLoading] = useState(true);
+  const [scrolled, setScrolled] = useState(false);
+  const [intelligenceExpanded, setIntelligenceExpanded] = useState(false);
+  const [campaignsExpanded, setCampaignsExpanded] = useState(false);
+  const [expandedProjects, setExpandedProjects] = useState<Record<string, boolean>>({});
+
+  const arsenal = [
     {
-      name: "Backend Development",
-      description: "Python, Django, Docker - Building robust server-side applications",
-      icon: "⚙️",
-      level: "expert"
+      name: 'Backend Development',
+      description:
+        'Python, Django, Docker - Building robust server infrastructure and data management systems',
+      icon: '💻',
+      level: 'commander',
     },
     {
-      name: "Web Technologies", 
-      description: "HTML, CSS, JavaScript, Git - Creating dynamic web experiences",
-      icon: "🌐",
-      level: "expert"
+      name: 'Web Development',
+      description:
+        'HTML, CSS, JavaScript, Git - Creating dynamic web applications and user interfaces',
+      icon: '🔧',
+      level: 'commander',
     },
     {
-      name: "Frontend & Databases",
-      description: "React, PHP - Developing user interfaces and database solutions", 
-      icon: "💻",
-      level: "intermediate"
+      name: 'Frontend Development',
+      description: 'React, PHP - Interactive user interfaces and database integration',
+      icon: '📱',
+      level: 'lieutenant',
     },
     {
-      name: "Machine Learning",
-      description: "Building intelligent systems and predictive models",
-      icon: "🤖",
-      level: "expert"
-    }
-  ]
+      name: 'Machine Learning',
+      description:
+        'AI/ML Technologies - Data analysis, predictive modeling, and intelligent systems',
+      icon: '🤖',
+      level: 'commander',
+    },
+    {
+      name: 'Project Management',
+      description:
+        'Leadership and Planning - Coordinating development projects and resource management',
+      icon: '📋',
+      level: 'lieutenant',
+    },
+  ];
+
+  const handleIntelligenceToggle = () => {
+    setIntelligenceExpanded(!intelligenceExpanded);
+  };
+
+  const handleCampaignsToggle = () => {
+    setCampaignsExpanded(!campaignsExpanded);
+  };
+
+  const handleProjectToggle = (projectKey: string) => {
+    setExpandedProjects((prev) => ({ ...prev, [projectKey]: !prev[projectKey] }));
+  };
 
   useEffect(() => {
-    // Loading animation
-    const timer = setTimeout(() => {
-      setLoading(false)
-    }, 2000)
+    const timer = setTimeout(() => setLoading(false), 2000);
+    return () => clearTimeout(timer);
+  }, []);
 
-    return () => clearTimeout(timer)
-  }, [])
 
   useEffect(() => {
-    // Scroll effects
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50)
-      
-      // Animate sections on scroll
-      const sections = document.querySelectorAll('.about, .skills, .contact')
-      sections.forEach(section => {
-        const rect = section.getBoundingClientRect()
+      setScrolled(window.scrollY > 50);
+
+      document.querySelectorAll('.about, .arsenal, .campaigns-overview, .contact').forEach((section) => {
+        const rect = section.getBoundingClientRect();
         if (rect.top < window.innerHeight - 100) {
-          section.classList.add('animate')
+          section.classList.add('animate');
         }
-      })
+      });
+    };
+
+    // Make hero and campaigns sections visible immediately
+    const heroSection = document.querySelector('.hero');
+    const campaignsSection = document.querySelector('.campaigns-overview');
+    if (heroSection) {
+      heroSection.classList.add('animate');
+    }
+    if (campaignsSection) {
+      campaignsSection.classList.add('animate');
     }
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+    // Initial check for sections already in view
+    handleScroll();
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const createParticles = () => {
-    return Array.from({ length: 20 }, (_, i) => (
+    const formation = Array.from({ length: 6 }, (_, i) => (
       <div
-        key={i}
-        className="particle"
+        key={`arrow-${i}`}
+        className="particle arrow-formation"
         style={{
-          left: `${Math.random() * 100}%`,
-          animationDelay: `${Math.random() * 15}s`,
-          animationDuration: `${10 + Math.random() * 5}s`
+          left: '-50px',
+          top: `${15 + i * 12}%`,
+          animationDelay: `${i * 1.5}s`,
+          animationDuration: '6s'
         }}
-      />
-    ))
+      >
+        <span className="arrow-tail">—————</span>
+        <span className="arrow-head">▶</span>
+      </div>
+    ));
+
+    return formation;
   }
 
   if (loading) {
     return (
-      <div className={`loading ${!loading ? 'fade-out' : ''}`}>
-        <div className="spinner"></div>
+      <div className="loading">
+        <div className="spinner" />
       </div>
-    )
+    );
   }
 
   return (
     <div className="portfolio">
-      {/* Floating Particles */}
-      <div className="floating-particles">
-        {createParticles()}
-      </div>
-
-      {/* Header/Navigation */}
       <header className={`header ${scrolled ? 'scrolled' : ''}`}>
         <nav className="nav">
           <div className="nav-brand">PK</div>
           <div className="nav-links">
-            <a href="#about">About</a>
-            <a href="#skills">Skills</a>
-            <a href="#contact">Contact</a>
+            <a href="#about">Background</a>
+            <a href="#arsenal">Arsenal</a>
+            <a href="#contact">Diplomatic Channels</a>
           </div>
         </nav>
       </header>
 
-      {/* Hero Section */}
       <section className="hero">
+        {/* Floating Particles - Only in Hero */}
+        <div className="floating-particles">{createParticles()}</div>
+        
         <div className="hero-content">
           <h1 className="hero-title">
-            Hi, I'm <span className="highlight">Prabhakar Kandel</span>
+            <span className="highlight">Prabhakar Kandel</span>
           </h1>
-          <p className="hero-subtitle">
-            Computer Engineering Student | Backend Developer | ML Enthusiast
-          </p>
+          <p className="hero-subtitle">Backend Developer | Machine Learning Enthusiast</p>
           <p className="hero-description">
-           Final semester Computer Engineering student passionate about building robust backend systems and intelligent solutions.
+            Final semester computer engineering student with a passion for machine learning and
+            proficiency in backend development and project management.
           </p>
           <div className="hero-buttons">
-            <button className="btn-primary">View My Work</button>
+            <a href="#campaigns" className="btn-primary">
+              ⚔️ VIEW CAMPAIGNS
+            </a>
+            <a href="#arsenal" className="btn-secondary">
+              🎯 VIEW ARSENAL
+            </a>
           </div>
         </div>
       </section>
 
-      {/* About Section */}
-      <section id="about" className="about">
+      <section id="about" className="about background">
         <div className="container">
-          <h2 className="section-title">About Me</h2>
+          <h2 className="section-title">📖 BACKGROUND</h2>
           <div className="about-content">
             <div className="about-text">
               <p>
-                I'm a 22-year-old Computer Engineering student in my final semester, passionate about technology and innovation. My journey in computer science has led me to specialize in backend development, database management, and machine learning.
+                A 22-year-old Computer Engineering student specializing in backend development,
+                database management, and machine learning technologies.
               </p>
               <p>
-                I enjoy solving complex problems and building scalable solutions that make a difference. When I'm not coding, I'm exploring new technologies and contributing to open-source projects.
+                Focused on building scalable software solutions and exploring emerging technologies.
+                Actively contributing to open-source projects and continuous learning.
               </p>
-            </div>
-            <div className="about-stats">
-              <div className="stat">
-                <h3>22</h3>
-                <p>Years Old</p>
-              </div>
-              <div className="stat">
-                <h3>Final</h3>
-                <p>Semester</p>
-              </div>
-              <div className="stat">
-                <h3>3+</h3>
-                <p>Core Skills</p>
-              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Skills Section */}
-      <section id="skills" className="skills">
+      <section id="arsenal" className="arsenal">
         <div className="container">
-          <h2 className="section-title">Skills & Expertise</h2>
-          <div className="skills-grid">
-            {skills.map((skill, index) => (
-              <div key={index} className={`skill-card ${skill.level}`}>
-                <div className="skill-icon">{skill.icon}</div>
-                <h3 className="skill-name">{skill.name}</h3>
-                <p className="skill-description">{skill.description}</p>
-                <div className="skill-level">
-                  {skill.level === 'expert' ? '⭐⭐⭐' : '⭐⭐'}
+          <h2 className="section-title"><span className="clashing-sword left">⚔️</span> ARSENAL <span className="clashing-sword right">⚔️</span></h2>
+          <div className="arsenal-grid">
+            {arsenal.map((weapon, index) => (
+              <div key={index} className={`arsenal-card ${weapon.level}`}>
+                <div className="arsenal-icon">{weapon.icon}</div>
+                <h3 className="arsenal-name">{weapon.name}</h3>
+                <p className="arsenal-description">{weapon.description}</p>
+                <div className="arsenal-rank">
+                  {weapon.level === 'commander' ? '🔥🔥🔥' : '🔥🔥'}
                 </div>
               </div>
             ))}
           </div>
-          
-          <div className="tech-stack">
-            <h3 className="tech-title">Technical Skills Overview</h3>
-            <div className="tech-tags">
-              <span className="tech-tag">Python ⭐⭐⭐</span>
-              <span className="tech-tag">Django ⭐⭐⭐</span>
-              <span className="tech-tag">Docker ⭐⭐⭐</span>
-              <span className="tech-tag">HTML ⭐⭐⭐</span>
-              <span className="tech-tag">CSS ⭐⭐⭐</span>
-              <span className="tech-tag">JavaScript ⭐⭐⭐</span>
-              <span className="tech-tag">Git & Version Control ⭐⭐⭐</span>
-              <span className="tech-tag">React ⭐⭐</span>
-              <span className="tech-tag">PHP ⭐⭐</span>
+
+          <div className="inventory">
+            <h3 className="inventory-title">📦 INVENTORY</h3>
+            <div className="weapon-tags">
+              <span className="weapon-tag">Python 🔥🔥🔥</span>
+              <span className="weapon-tag">Django 🔥🔥🔥</span>
+              <span className="weapon-tag">Docker 🔥🔥🔥</span>
+              <span className="weapon-tag">HTML 🔥🔥🔥</span>
+              <span className="weapon-tag">CSS 🔥🔥🔥</span>
+              <span className="weapon-tag">JavaScript 🔥🔥🔥</span>
+              <span className="weapon-tag">Git 🔥🔥🔥</span>
+              <span className="weapon-tag">React 🔥🔥</span>
+              <span className="weapon-tag">PHP 🔥🔥</span>
             </div>
           </div>
         </div>
       </section>
 
+      <section id="campaigns" className="campaigns-overview">
+        <div className="container">
+          <h2 className="section-title">🏆 CAMPAIGNS</h2>
+          <p className="section-description">
+            Explore my development journey through learning projects and real-world applications
+          </p>
+
+          {/* Intelligence Operations */}
+          <div className="campaign-section">
+            <button
+              className={`section-toggle ${intelligenceExpanded ? 'expanded' : ''}`}
+              onClick={handleIntelligenceToggle}
+              type="button"
+            >
+              <span className="toggle-icon">🎯</span>
+              <span className="toggle-title">INTELLIGENCE OPERATIONS</span>
+              <span className="toggle-arrow">{intelligenceExpanded ? '▼' : '▶'}</span>
+            </button>
+            
+            <div className={`collapsible-content ${intelligenceExpanded ? 'expanded' : 'collapsed'}`}>
+              <p className="section-subtitle">The projects that helped me learn</p>
+              
+              <div className="project-list">
+                <div className="project-item">
+                  <button
+                    className={`project-header ${expandedProjects['nepali-names'] ? 'expanded' : ''}`}
+                    onClick={() => handleProjectToggle('nepali-names')}
+                    type="button"
+                  >
+                    <span className="project-icon">🇳🇵</span>
+                    <span className="project-name">Nepali Name Generator</span>
+                    <span className="project-status completed">Completed</span>
+                    <span className="project-arrow">
+                      {expandedProjects['nepali-names'] ? '▼' : '▶'}
+                    </span>
+                  </button>
+                  {expandedProjects['nepali-names'] && (
+                    <div className="project-details">
+                      <div className="war-arsenal">War Arsenal: Machine Learning</div>
+                      <p className="project-description">
+                        A RNN empowered network used to generate authentic Nepali names
+                      </p>
+                      <div className="project-links">
+                        <a
+                          href="https://github.com/prabhakarkandel33/NepaliNamesGenerator"
+                          className="btn btn-primary"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          ⚔️ Check it out here
+                        </a>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <div className="project-item">
+                  <button
+                    className={`project-header ${expandedProjects['nepali-poems'] ? 'expanded' : ''}`}
+                    onClick={() => handleProjectToggle('nepali-poems')}
+                    type="button"
+                  >
+                    <span className="project-icon">📜</span>
+                    <span className="project-name">Nepali Poem Generator</span>
+                    <span className="project-status completed">Completed</span>
+                    <span className="project-arrow">
+                      {expandedProjects['nepali-poems'] ? '▼' : '▶'}
+                    </span>
+                  </button>
+                  {expandedProjects['nepali-poems'] && (
+                    <div className="project-details">
+                      <div className="war-arsenal">War Arsenal: Machine Learning (Transformer)</div>
+                      <p className="project-description">
+                        A project which learns to generate Nepali poems from authentic examples
+                      </p>
+                      <div className="project-links">
+                        <a
+                          href="https://github.com/prabhakarkandel33/NepaliPoemGenerator"
+                          className="btn btn-primary"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          ⚔️ Check it out here
+                        </a>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <div className="project-item">
+                  <button
+                    className={`project-header ${expandedProjects['nepali-translator'] ? 'expanded' : ''}`}
+                    onClick={() => handleProjectToggle('nepali-translator')}
+                    type="button"
+                  >
+                    <span className="project-icon">🔄</span>
+                    <span className="project-name">Nepali-English Translator</span>
+                    <span className="project-status ongoing">Ongoing</span>
+                    <span className="project-arrow">
+                      {expandedProjects['nepali-translator'] ? '▼' : '▶'}
+                    </span>
+                  </button>
+                  {expandedProjects['nepali-translator'] && (
+                    <div className="project-details">
+                      <div className="war-arsenal">War Arsenal: Machine Learning (Transformer)</div>
+                      <p className="project-description">
+                        Learns from one million sentence pairs to translate English ↔ Nepali
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Extensive Campaigns */}
+          <div className="campaign-section">
+            <button
+              className={`section-toggle ${campaignsExpanded ? 'expanded' : ''}`}
+              onClick={handleCampaignsToggle}
+              type="button"
+            >
+              <span className="toggle-icon">🏆</span>
+              <span className="toggle-title">EXTENSIVE CAMPAIGNS</span>
+              <span className="toggle-arrow">{campaignsExpanded ? '▼' : '▶'}</span>
+            </button>
+            
+            <div className={`collapsible-content ${campaignsExpanded ? 'expanded' : 'collapsed'}`}>
+              <p className="section-subtitle">
+                Real-world applications of my war arsenal knowledge and intelligence operations
+              </p>
+
+              <div className="project-list">
+                    <div className="project-item">
+                      <button
+                        className={`project-header ${expandedProjects['aaladoc'] ? 'expanded' : ''}`}
+                        onClick={() => handleProjectToggle('aaladoc')}
+                        type="button"
+                      >
+                        <span className="project-icon">🏥</span>
+                        <span className="project-name">Hospital Management Site - Aaladoc</span>
+                        <span className="project-status completed">Completed</span>
+                        <span className="project-arrow">{expandedProjects['aaladoc'] ? '▼' : '▶'}</span>
+                      </button>
+                      {expandedProjects['aaladoc'] && (
+                        <div className="project-details">
+                          <div className="war-arsenal">War Arsenal: Django</div>
+                          <p className="project-description">
+                            Handled appointment booking, real-time chat, task queuing, async operations
+                            and caching.
+                          </p>
+                          <div className="project-links">
+                            <span className="btn btn-secondary">
+                              📱 Check it out on Play Store (Aaladoc)
+                            </span>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="project-item">
+                      <button
+                        className={`project-header ${expandedProjects['roommate-finder'] ? 'expanded' : ''}`}
+                        onClick={() => handleProjectToggle('roommate-finder')}
+                        type="button"
+                      >
+                        <span className="project-icon">🏠</span>
+                        <span className="project-name">Roommate Finder Application</span>
+                        <span className="project-status completed">Completed</span>
+                        <span className="project-arrow">
+                          {expandedProjects['roommate-finder'] ? '▼' : '▶'}
+                        </span>
+                      </button>
+                      {expandedProjects['roommate-finder'] && (
+                        <div className="project-details">
+                          <div className="war-arsenal">War Arsenal: Django</div>
+                          <p className="project-description">
+                            Recommendation system + real-time chat based on personal preferences.
+                          </p>
+                          <div className="project-links">
+                            <a
+                              href="https://github.com/prabhakarkandel33/RoomateFinder"
+                              className="btn btn-primary"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              ⚔️ Check it out here
+                            </a>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="project-item">
+                      <button
+                        className={`project-header ${expandedProjects['wellness-app'] ? 'expanded' : ''}`}
+                        onClick={() => handleProjectToggle('wellness-app')}
+                        type="button"
+                      >
+                        <span className="project-icon">💪</span>
+                        <span className="project-name">Wellness Application</span>
+                        <span className="project-status ongoing">Ongoing</span>
+                        <span className="project-arrow">
+                          {expandedProjects['wellness-app'] ? '▼' : '▶'}
+                        </span>
+                      </button>
+                      {expandedProjects['wellness-app'] && (
+                        <div className="project-details">
+                          <div className="war-arsenal">
+                            War Arsenal: Django, Reinforcement Learning, RAG
+                          </div>
+                          <p className="project-description">
+                            Personalized training regimes using RL for behavior adaptation + RAG
+                            chatbot + Django REST API.
+                          </p>
+                          <div className="project-links">
+                            <a
+                              href="https://github.com/prabhakarkandel33/WellnessApplication"
+                              className="btn btn-primary"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              ⚔️ Check it out here
+                            </a>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+          </section>
+
+     
       {/* Contact Section */}
       <section id="contact" className="contact">
         <div className="container">
-          <h2 className="section-title">Let's Connect</h2>
+          <h2 className="section-title">🤝 DIPLOMATIC CHANNELS</h2>
           <p className="contact-description">
-            I'm always open to discussing new opportunities and interesting projects. Feel free to reach out!
+            Ready to forge new alliances and strategic partnerships. Send word through secure channels!
           </p>
           
           <div className="social-links">
-            <h3 className="social-title">Find me on</h3>
+            <h3 className="social-title">🔗 Communication Channels</h3>
             <div className="social-grid">
               <div className="social-link email">
                 <span className="social-icon">
@@ -254,14 +515,13 @@ function App() {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="footer">
         <div className="container">
-          <p>&copy; 2026 Prabhakar Kandel.</p>
+          <p>© {new Date().getFullYear()} Prabhakar Kandel</p>
         </div>
       </footer>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
