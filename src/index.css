@@ -1,11 +1,11 @@
 :root {
-  font-family: 'Inter', 'Segoe UI', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Fira Code', 'JetBrains Mono', monospace;
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color-scheme: dark;
+  color: #00ff41;
+  background-color: #000500;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -21,7 +21,7 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background: #242424;
+  background: #000500;
 }
 
 #root {
@@ -31,16 +31,17 @@ body {
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #00ff41;
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: #33ff33;
 }
 
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
   line-height: 1.2;
+  font-family: 'Fira Code', monospace;
 }
 
 h1 {
@@ -58,17 +59,19 @@ button {
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+  font-family: 'Fira Code', monospace;
+  background-color: #001a00;
+  color: #00ff41;
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: #00ff41;
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 2px solid #00ff41;
 }
 
 /* Smooth scrolling for anchor links */
@@ -82,16 +85,18 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: #1a1a1a;
+  background: #001a00;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #646cff;
+  background: #00ff41;
   border-radius: 4px;
+  box-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #535bf2;
+  background: #33ff33;
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.8);
 }
 
 @media (prefers-color-scheme: light) {

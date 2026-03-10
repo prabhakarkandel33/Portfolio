@@ -1,4 +1,4 @@
-/* War Map Portfolio Theme with GSAP Scroll Animations */
+/* Code Matrix Portfolio Theme */
 
 /* Reset and Base Styles */
 * {
@@ -12,15 +12,15 @@ html {
 }
 
 body {
-  font-family: 'Cinzel', 'EB Garamond', serif;
-  background: linear-gradient(135deg, #2c1810 0%, #1a0f0a 25%, #0f0605 50%, #1a0f0a 75%, #2c1810 100%);
-  color: #e8dcc0;
+  font-family: 'Fira Code', 'JetBrains Mono', 'Source Code Pro', monospace;
+  background: linear-gradient(135deg, #001a00 0%, #000d00 25%, #000500 50%, #000d00 75%, #001a00 100%);
+  color: #00ff41;
   line-height: 1.6;
   overflow-x: hidden;
   position: relative;
 }
 
-/* War Map Background Texture */
+/* Code Matrix Background Texture */
 body::before {
   content: '';
   position: fixed;
@@ -29,10 +29,10 @@ body::before {
   right: 0;
   bottom: 0;
   background-image: 
-    radial-gradient(circle at 20% 50%, rgba(139, 69, 19, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(160, 82, 45, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 40% 80%, rgba(101, 67, 33, 0.06) 0%, transparent 50%),
-    linear-gradient(45deg, transparent 48%, rgba(139, 69, 19, 0.02) 49%, rgba(139, 69, 19, 0.02) 51%, transparent 52%);
+    radial-gradient(circle at 20% 50%, rgba(0, 255, 65, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(0, 204, 0, 0.02) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(51, 255, 51, 0.02) 0%, transparent 50%),
+    linear-gradient(45deg, transparent 48%, rgba(0, 255, 65, 0.01) 49%, rgba(0, 255, 65, 0.01) 51%, transparent 52%);
   background-size: 200px 200px, 300px 300px, 250px 250px, 50px 50px;
   pointer-events: none;
   z-index: -1;
@@ -54,31 +54,26 @@ body::before {
   position: absolute;
   display: flex;
   align-items: center;
-  color: rgba(218, 165, 32, 0.8);
-  font-size: 14px;
+  color: rgba(0, 255, 65, 0.8);
+  font-size: 16px;
   font-weight: bold;
-  text-shadow: 0 0 4px rgba(218, 165, 32, 0.6);
+  text-shadow: 0 0 8px rgba(0, 255, 65, 0.8);
   pointer-events: none;
   z-index: 1;
   white-space: nowrap;
+  font-family: 'Fira Code', monospace;
 }
 
-.arrow-tail {
-  color: rgba(218, 165, 32, 0.7);
-  font-family: monospace;
-  font-size: 10px;
+.code-text {
+  color: rgba(0, 255, 65, 0.9);
+  font-family: 'Fira Code', monospace;
+  font-size: 18px;
   margin: 0;
   line-height: 1;
+  text-shadow: 0 0 10px rgba(0, 255, 65, 1);
 }
 
-.arrow-head {
-  color: rgba(218, 165, 32, 0.9);
-  font-size: 16px;
-  margin: 0;
-  line-height: 1;
-}
-
-.arrow-formation {
+.code-formation {
   animation: smoothRight 6s infinite linear;
 }
 
@@ -118,7 +113,7 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle, #2c1810 0%, #1a0f0a 50%, #0f0605 100%);
+  background: linear-gradient(135deg, #001a00 0%, #000d00 50%, #000500 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -134,8 +129,8 @@ body::before {
 .spinner {
   width: 60px;
   height: 60px;
-  border: 3px solid rgba(218, 165, 32, 0.1);
-  border-top: 3px solid #daa520;
+  border: 3px solid rgba(0, 255, 65, 0.1);
+  border-top: 3px solid #00ff41;
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
@@ -151,16 +146,16 @@ body::before {
   top: 0;
   left: 0;
   right: 0;
-  background: rgba(44, 24, 16, 0.95);
+  background: rgba(0, 26, 0, 0.95);
   backdrop-filter: blur(10px);
-  border-bottom: 2px solid rgba(218, 165, 32, 0.2);
+  border-bottom: 2px solid rgba(0, 255, 65, 0.3);
   z-index: 1000;
   transition: all 0.3s ease;
 }
 
 .header.scrolled {
-  background: rgba(44, 24, 16, 0.98);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  background: rgba(0, 26, 0, 0.98);
+  box-shadow: 0 4px 20px rgba(0, 255, 65, 0.2);
 }
 
 .nav {
@@ -175,9 +170,10 @@ body::before {
 .nav-brand {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #daa520;
-  font-family: 'Cinzel Decorative', 'Cinzel', serif;
-  letter-spacing: 1px;
+  color: #00ff41;
+  font-family: 'Fira Code', monospace;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(0, 255, 65, 0.8);
 }
 
 .nav-links {
@@ -186,15 +182,17 @@ body::before {
 }
 
 .nav-links a {
-  color: #e8dcc0;
+  color: #33ff33;
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s ease;
   position: relative;
+  font-family: 'Fira Code', monospace;
 }
 
 .nav-links a:hover {
-  color: #daa520;
+  color: #00ff41;
+  text-shadow: 0 0 8px rgba(0, 255, 65, 0.8);
 }
 
 .nav-links a::after {
@@ -204,7 +202,8 @@ body::before {
   left: 0;
   width: 0;
   height: 2px;
-  background: #daa520;
+  background: #00ff41;
+  box-shadow: 0 0 5px rgba(0, 255, 65, 0.8);
   transition: width 0.3s ease;
 }
 
@@ -225,9 +224,8 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
   position: relative;
-  background: radial-gradient(circle at center, rgba(218, 165, 32, 0.05) 0%, transparent 70%);
+  background: radial-gradient(ellipse at center, rgba(0, 255, 65, 0.05) 0%, transparent 70%);
   opacity: 1;
   transform: translateY(0);
 }
@@ -240,14 +238,14 @@ body::before {
 
 .hero-title {
   font-size: clamp(3rem, 8vw, 5rem);
-  font-weight: 900;
+  font-weight: 700;
   margin-bottom: 1rem;
-  font-family: 'Cinzel Decorative', 'Cinzel', serif;
-  letter-spacing: 2px;
+  font-family: 'Fira Code', monospace;
+  letter-spacing: 3px;
 }
 
 .highlight {
-  background: linear-gradient(45deg, #daa520, #ffd700, #daa520);
+  background: linear-gradient(45deg, #00ff41, #33ff33, #00ff41);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -260,15 +258,16 @@ body::before {
 }
 
 .hero-subtitle {
-  font-size: clamp(1.2rem, 4vw, 1.8rem);
-  color: #daa520;
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  color: #00ff41;
   margin-bottom: 1rem;
   font-weight: 600;
+  text-shadow: 0 0 10px rgba(0, 255, 65, 0.6);
 }
 
 .hero-description {
   font-size: clamp(1rem, 2vw, 1.2rem);
-  color: #c9b037;
+  color: #33ff33;
   margin-bottom: 2rem;
   max-width: 600px;
   margin-left: auto;
@@ -292,32 +291,34 @@ body::before {
   border-radius: 8px;
   font-weight: 600;
   text-decoration: none;
-  transition: all 0.3s ease;
+  font-family: 'Fira Code', monospace;
   cursor: pointer;
-  border: 2px solid transparent;
+  transition: all 0.3s ease;
 }
 
 .btn-primary {
-  background: linear-gradient(45deg, #daa520, #b8860b);
-  color: #1a0f0a;
-  box-shadow: 0 4px 15px rgba(218, 165, 32, 0.3);
+  background: linear-gradient(45deg, #00cc00, #00ff41);
+  color: #001a00;
+  box-shadow: 0 4px 15px rgba(0, 255, 65, 0.4);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(218, 165, 32, 0.4);
-  background: linear-gradient(45deg, #ffd700, #daa520);
+  box-shadow: 0 8px 25px rgba(0, 255, 65, 0.6);
+  background: linear-gradient(45deg, #00ff41, #33ff33);
 }
 
 .btn-secondary {
   background: transparent;
-  color: #daa520;
-  border: 2px solid #daa520;
+  color: #00ff41;
+  border: 2px solid #00ff41;
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
 }
 
 .btn-secondary:hover {
-  background: rgba(218, 165, 32, 0.1);
+  background: rgba(0, 255, 65, 0.1);
   transform: translateY(-2px);
+  box-shadow: 0 0 15px rgba(0, 255, 65, 0.5);
 }
 
 /* Sections */
@@ -334,20 +335,20 @@ section.animate {
 }
 
 .section-title {
-  font-size: clamp(2.5rem, 6vw, 3.5rem);
-  font-weight: 900;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
   text-align: center;
   margin-bottom: 3rem;
-  color: #daa520;
-  font-family: 'Cinzel Decorative', 'Cinzel', serif;
-  letter-spacing: 1px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  color: #00ff41;
+  font-family: 'Fira Code', monospace;
+  letter-spacing: 2px;
+  text-shadow: 0 0 20px rgba(0, 255, 65, 0.8);
 }
 
 .section-description {
   text-align: center;
   font-size: 1.2rem;
-  color: #c9b037;
+  color: #33ff33;
   margin-bottom: 3rem;
   max-width: 600px;
   margin-left: auto;
@@ -355,12 +356,21 @@ section.animate {
 }
 
 /* About Section */
+.about {
+  background: linear-gradient(135deg, rgba(0, 26, 0, 0.6) 0%, rgba(0, 13, 0, 0.4) 100%);
+  border-radius: 20px;
+  margin: 2rem;
+  padding: 4rem 2rem;
+  border: 2px solid rgba(0, 255, 65, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 255, 65, 0.1);
+}
+
 .command-center {
-  background: rgba(26, 15, 10, 0.6);
+  background: rgba(0, 26, 0, 0.6);
   border-radius: 15px;
   margin: 2rem;
   padding: 3rem;
-  border: 1px solid rgba(218, 165, 32, 0.2);
+  border: 1px solid rgba(0, 255, 65, 0.2);
 }
 
 .about-content {
@@ -377,260 +387,265 @@ section.animate {
 
 .about-text p {
   font-size: 1.1rem;
-  color: #e8dcc0;
+  color: #33ff33;
   margin-bottom: 1.5rem;
+  line-height: 1.8;
 }
 
-/* Arsenal Section */
-.arsenal {
-  background: linear-gradient(135deg, rgba(26, 15, 10, 0.8) 0%, rgba(44, 24, 16, 0.6) 100%);
+/* Education Section */
+.education-section {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 2px solid rgba(0, 255, 65, 0.2);
+}
+
+.education-title {
+  font-size: 1.5rem;
+  color: #00ff41;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-family: 'Fira Code', monospace;
+}
+
+.education-card {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  background: linear-gradient(145deg, rgba(0, 26, 0, 0.9), rgba(0, 13, 0, 0.7));
+  border: 2px solid rgba(0, 255, 65, 0.3);
+  border-radius: 15px;
+  padding: 2rem;
+  max-width: 700px;
+  margin: 0 auto;
+  transition: all 0.4s ease;
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(0, 255, 65, 0.1);
+}
+
+.education-card:hover {
+  transform: translateY(-5px);
+  border-color: #00ff41;
+  box-shadow: 
+    0 8px 25px rgba(0, 255, 65, 0.3),
+    0 0 30px rgba(0, 255, 65, 0.15);
+}
+
+.college-logo {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.5rem;
+  border: 1px solid rgba(0, 255, 65, 0.2);
+}
+
+.education-info {
+  flex: 1;
+}
+
+.degree {
+  font-size: 1.2rem;
+  color: #00ff41;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.college-name {
+  font-size: 1.1rem;
+  color: #33ff33;
+  margin-bottom: 0.3rem;
+  font-weight: 500;
+}
+
+.college-location, .affiliation {
+  font-size: 0.95rem;
+  color: rgba(0, 255, 65, 0.8);
+  margin: 0.2rem 0;
+}
+
+/* Skills Section */
+.skills {
+  background: linear-gradient(135deg, rgba(0, 26, 0, 0.8) 0%, rgba(0, 13, 0, 0.6) 100%);
   border-radius: 20px;
   margin: 2rem;
   padding: 4rem 2rem;
+  border: 2px solid rgba(0, 255, 65, 0.2);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 40px rgba(0, 255, 65, 0.1),
+    inset 0 1px 0 rgba(0, 255, 65, 0.1);
 }
 
-.arsenal-grid {
+.skills-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
   margin-bottom: 3rem;
 }
 
-.arsenal-card {
-  background: rgba(44, 24, 16, 0.8);
-  border: 2px solid rgba(218, 165, 32, 0.3);
+.skill-card {
+  background: linear-gradient(145deg, rgba(0, 26, 0, 0.9), rgba(0, 13, 0, 0.7));
+  border: 2px solid rgba(0, 255, 65, 0.3);
   border-radius: 15px;
   padding: 2rem;
   text-align: center;
   transition: all 0.4s ease;
   position: relative;
   overflow: hidden;
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(0, 255, 65, 0.1),
+    inset 0 1px 0 rgba(0, 255, 65, 0.1);
 }
 
-.arsenal-card::before {
+.skill-card::before {
   content: '';
   position: absolute;
   top: 0;
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(218, 165, 32, 0.1), transparent);
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.1), transparent);
   transition: left 0.6s ease;
 }
 
-.arsenal-card:hover::before {
+.skill-card:hover::before {
   left: 100%;
 }
 
-.arsenal-card:hover {
-  transform: translateY(-10px);
-  border-color: #daa520;
-  box-shadow: 0 15px 30px rgba(218, 165, 32, 0.2);
+.skill-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  border-color: #00ff41;
+  box-shadow: 
+    0 15px 40px rgba(0, 255, 65, 0.4),
+    0 0 30px rgba(0, 255, 65, 0.2),
+    inset 0 1px 0 rgba(0, 255, 65, 0.2);
 }
 
-.arsenal-card.commander {
-  border-color: #ffd700;
+.skill-card.expert {
+  border-color: #00ff41;
 }
 
-.arsenal-card.lieutenant {
-  border-color: #daa520;
+.skill-card.advanced {
+  border-color: #00cc00;
 }
 
-.arsenal-icon {
+.skill-icon {
   font-size: 3rem;
   margin-bottom: 1rem;
 }
 
-.arsenal-name {
+.skill-name {
   font-size: 1.4rem;
-  color: #daa520;
+  color: #00ff41;
   margin-bottom: 1rem;
   font-weight: 600;
+  font-family: 'Fira Code', monospace;
 }
 
-.arsenal-description {
-  color: #c9b037;
+.skill-description {
+  color: #33ff33;
   margin-bottom: 1rem;
   line-height: 1.6;
 }
 
-.arsenal-rank {
+.skill-level {
   font-size: 1.2rem;
+  color: #00ff41;
+  font-family: 'Fira Code', monospace;
+  letter-spacing: 2px;
 }
 
-/* Inventory */
-.inventory {
-  background: rgba(26, 15, 10, 0.8);
+/* Tech Stack */
+.tech-stack {
+  background: linear-gradient(145deg, rgba(0, 26, 0, 0.9), rgba(0, 13, 0, 0.7));
   border-radius: 15px;
   padding: 2rem;
-  border: 1px solid rgba(218, 165, 32, 0.2);
+  border: 2px solid rgba(0, 255, 65, 0.3);
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(0, 255, 65, 0.1),
+    inset 0 1px 0 rgba(0, 255, 65, 0.1);
 }
 
-.inventory-title {
+.tech-title {
   font-size: 1.8rem;
-  color: #daa520;
+  color: #00ff41;
   text-align: center;
   margin-bottom: 1.5rem;
-  font-family: 'Cinzel', serif;
+  font-family: 'Fira Code', monospace;
   font-weight: 600;
 }
 
-.weapon-tags {
+.tech-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   justify-content: center;
 }
 
-.weapon-tag {
-  background: linear-gradient(45deg, rgba(218, 165, 32, 0.2), rgba(184, 134, 11, 0.2));
-  color: #daa520;
-  padding: 0.7rem 1.2rem;
-  border-radius: 25px;
-  border: 1px solid rgba(218, 165, 32, 0.3);
+.tech-tag {
+  background: linear-gradient(145deg, rgba(0, 77, 0, 0.8), rgba(0, 51, 0, 0.6));
+  color: #00ff41;
+  padding: 0.8rem 1.4rem;
+  border-radius: 10px;
+  border: 2px solid rgba(0, 255, 65, 0.4);
   font-weight: 600;
   transition: all 0.3s ease;
+  font-family: 'Fira Code', monospace;
+  box-shadow: 
+    0 4px 10px rgba(0, 0, 0, 0.3),
+    0 0 15px rgba(0, 255, 65, 0.2),
+    inset 0 1px 0 rgba(0, 255, 65, 0.2);
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.weapon-tag:hover {
-  background: linear-gradient(45deg, rgba(218, 165, 32, 0.3), rgba(184, 134, 11, 0.3));
-  transform: scale(1.05);
+.tech-tag svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
 }
 
-/* Book Page Turning Animation */
-@keyframes sword-clash-left {
-  0% {
-    transform: translateX(-80px) rotateY(-60deg);
-    opacity: 0;
-  }
-  60% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(0) rotateY(0deg);
-    opacity: 1;
-  }
+.tech-tag:hover {
+  background: linear-gradient(145deg, rgba(0, 102, 0, 1), rgba(0, 77, 0, 0.9));
+  transform: translateY(-3px) scale(1.05);
+  border-color: #00ff41;
+  box-shadow: 
+    0 8px 20px rgba(0, 0, 0, 0.4),
+    0 0 25px rgba(0, 255, 65, 0.5),
+    inset 0 1px 0 rgba(0, 255, 65, 0.3);
 }
 
-@keyframes sword-clash-right {
-  0% {
-    transform: translateX(80px) rotateY(60deg);
-    opacity: 0;
-  }
-  60% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(0) rotateY(0deg);
-    opacity: 1;
-  }
-}
-
-@keyframes sword-pulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.2);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
+/* Remove sword clash animations - not needed for code theme */
 .clashing-sword {
-  display: inline-block;
-  perspective: 1200px;
-  transform-style: preserve-3d;
-  margin: 0 0.5rem;
-  font-size: 2.5rem;
+  display: none;
 }
 
-.clashing-sword.left {
-  animation: sword-clash-left 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 2.1s forwards;
-  opacity: 0;
-}
-
-.clashing-sword.right {
-  animation: sword-clash-right 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 2.1s forwards;
-  opacity: 0;
-}
-
-.section-title:hover .clashing-sword {
-  animation: sword-pulse 0.6s ease-in-out;
-}
-
-/* Campaigns Section */
-.campaigns-overview {
-  background: linear-gradient(135deg, rgba(26, 15, 10, 0.9) 0%, rgba(44, 24, 16, 0.7) 100%);
+/* Projects Section */
+.projects-overview {
+  background: linear-gradient(135deg, rgba(0, 26, 0, 0.9) 0%, rgba(0, 13, 0, 0.7) 100%);
   border-radius: 20px;
   margin: 2rem;
   padding: 4rem 2rem;
-  border: 2px solid rgba(218, 165, 32, 0.2);
+  border: 2px solid rgba(0, 255, 65, 0.2);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 40px rgba(0, 255, 65, 0.1),
+    inset 0 1px 0 rgba(0, 255, 65, 0.1);
   opacity: 1 !important;
   transform: translateY(0) !important;
-  font-family: 'EB Garamond', serif;
+  font-family: 'Fira Code', monospace;
 }
 
-.campaign-section {
+.project-section {
   margin-bottom: 3rem;
-  font-family: 'EB Garamond', serif;
-}
-
-.subsection-description {
-  text-align: center;
-  color: #c9b037;
-  margin-bottom: 2rem;
-  font-style: italic;
-  font-family: 'EB Garamond', serif;
-  font-size: 1.1rem;
-  font-weight: 500;
-}
-
-/* Section Toggle Buttons */
-.section-toggle {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.5rem 2rem;
-  background: linear-gradient(135deg, rgba(218, 165, 32, 0.1) 0%, rgba(184, 134, 11, 0.1) 100%);
-  border: 2px solid rgba(218, 165, 32, 0.3);
-  border-radius: 15px;
-  color: #daa520;
-  font-size: 1.3rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-bottom: 1rem;
-  font-family: 'Cinzel Decorative', serif;
-}
-
-.section-toggle:hover {
-  background: linear-gradient(135deg, rgba(218, 165, 32, 0.2) 0%, rgba(184, 134, 11, 0.2) 100%);
-  border-color: #daa520;
-  transform: translateY(-2px);
-}
-
-.section-toggle.expanded {
-  background: linear-gradient(135deg, rgba(218, 165, 32, 0.3) 0%, rgba(184, 134, 11, 0.3) 100%);
-  border-color: #ffd700;
-}
-
-/* Project Names with Elegant Typography */
-.project-name {
-  font-family: 'Cinzel', serif;
-  font-weight: 600;
-  font-size: 1.1rem;
-  letter-spacing: 0.5px;
-}
-
-/* Project Descriptions */
-.project-description {
-  font-family: 'EB Garamond', serif;
-  font-size: 1.05rem;
-  font-weight: 400;
-  line-height: 1.7;
+  font-family: 'Fira Code', monospace;
 }
 
 /* Collapsible Content Animation */
@@ -650,13 +665,53 @@ section.animate {
 }
 
 .section-subtitle {
-  color: #c9b037;
-  font-style: italic;
-  font-family: 'EB Garamond', serif;
+  color: #33ff33;
+  font-family: 'Fira Code', monospace;
   font-size: 1rem;
-  font-weight: 400;
+  font-weight: 300;
   margin: 1rem 0 2rem 0;
   padding-left: 0.5rem;
+}
+
+/* Section Toggle Buttons */
+.section-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(135deg, rgba(0, 255, 65, 0.1) 0%, rgba(0, 204, 0, 0.1) 100%);
+  border: 2px solid rgba(0, 255, 65, 0.3);
+  border-radius: 15px;
+  color: #00ff41;
+  font-size: 1.3rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+  font-family: 'Fira Code', monospace;
+}
+
+.section-toggle:hover {
+  background: linear-gradient(135deg, rgba(0, 255, 65, 0.2) 0%, rgba(0, 204, 0, 0.2) 100%);
+  border-color: #00ff41;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(0, 255, 65, 0.3);
+}
+
+.section-toggle.expanded {
+  background: linear-gradient(135deg, rgba(0, 255, 65, 0.3) 0%, rgba(0, 204, 0, 0.3) 100%);
+  border-color: #00ff41;
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.4);
+}
+
+.subsection-description {
+  text-align: center;
+  color: #33ff33;
+  margin-bottom: 2rem;
+  font-family: 'Fira Code', monospace;
+  font-size: 1.1rem;
+  font-weight: 400;
 }
 
 .toggle-icon {
@@ -667,9 +722,10 @@ section.animate {
 .toggle-title {
   flex: 1;
   text-align: left;
-  font-family: 'Cinzel Decorative', serif;
+  font-family: 'Fira Code', monospace;
   font-weight: 700;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
+  font-size: 1.4rem;
 }
 
 .toggle-arrow {
@@ -681,11 +737,20 @@ section.animate {
   transform: rotate(90deg);
 }
 
-.toggle-title {
-  font-size: 1.4rem;
-  font-family: 'Cinzel Decorative', serif;
-  font-weight: 700;
+/* Project Names with Code Typography */
+.project-name {
+  font-family: 'Fira Code', monospace;
+  font-weight: 600;
+  font-size: 1.1rem;
   letter-spacing: 1px;
+}
+
+/* Project Descriptions */
+.project-description {
+  font-family: 'Fira Code', monospace;
+  font-size: 1.05rem;
+  font-weight: 300;
+  line-height: 1.7;
 }
 
 /* GSAP Scroll Container Styles */
@@ -698,21 +763,21 @@ section.animate {
   width: 100%;
   height: 40px;
   background: linear-gradient(to bottom, 
-    #8B4513 0%, 
-    #A0522D 15%, 
-    #654321 30%, 
-    #8B4513 45%, 
-    #5D4E37 60%, 
-    #8B4513 75%, 
-    #A0522D 90%, 
-    #654321 100%);
+    #003300 0%, 
+    #004d00 15%, 
+    #002200 30%, 
+    #003300 45%, 
+    #001a00 60%, 
+    #003300 75%, 
+    #004d00 90%, 
+    #002200 100%);
   border-radius: 20px;
   position: relative;
   box-shadow: 
-    0 -2px 10px rgba(0, 0, 0, 0.3),
-    0 2px 10px rgba(0, 0, 0, 0.5),
-    inset 0 -2px 5px rgba(0, 0, 0, 0.3),
-    inset 0 2px 5px rgba(255, 255, 255, 0.1);
+    0 -2px 10px rgba(0, 255, 65, 0.2),
+    0 2px 10px rgba(0, 255, 65, 0.3),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.5),
+    inset 0 2px 5px rgba(0, 255, 65, 0.1);
   margin-bottom: 10px;
 }
 
@@ -725,12 +790,13 @@ section.animate {
   height: 2px;
   background: linear-gradient(90deg, 
     transparent 0%, 
-    rgba(218, 165, 32, 0.6) 20%, 
-    rgba(255, 215, 0, 0.8) 50%, 
-    rgba(218, 165, 32, 0.6) 80%, 
+    rgba(0, 255, 65, 0.6) 20%, 
+    rgba(0, 255, 65, 0.9) 50%, 
+    rgba(0, 255, 65, 0.6) 80%, 
     transparent 100%);
   transform: translateY(-50%);
   border-radius: 1px;
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.6);
 }
 
 .scroll-cylinder::after {
@@ -755,24 +821,24 @@ section.animate {
   left: 5%;
   right: 5%;
   height: 8px;
-  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.4) 0%, transparent 70%);
+  background: radial-gradient(ellipse at center, rgba(0, 255, 65, 0.2) 0%, transparent 70%);
   border-radius: 50%;
 }
 
 .scroll-paper {
   background: linear-gradient(to bottom, 
-    #f4f1e8 0%, 
-    #f0ebe0 20%, 
-    #ebe3d5 40%, 
-    #e6dcc9 60%, 
-    #e1d4bd 80%, 
-    #dccdb1 100%);
-  border: 2px solid #c9b037;
+    #001a00 0%, 
+    #001100 20%, 
+    #000d00 40%, 
+    #000900 60%, 
+    #000500 80%, 
+    #000300 100%);
+  border: 2px solid #00ff41;
   border-radius: 10px;
   box-shadow: 
-    0 4px 20px rgba(0, 0, 0, 0.3),
-    inset 0 1px 3px rgba(255, 255, 255, 0.5),
-    inset 0 -1px 2px rgba(0, 0, 0, 0.1);
+    0 4px 20px rgba(0, 255, 65, 0.3),
+    inset 0 1px 3px rgba(0, 255, 65, 0.2),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.3);
   position: relative;
   overflow: hidden;
 }
@@ -785,16 +851,16 @@ section.animate {
   right: 0;
   bottom: 0;
   background-image: 
-    radial-gradient(circle at 20% 20%, rgba(139, 69, 19, 0.03) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(160, 82, 45, 0.02) 0%, transparent 50%),
-    linear-gradient(45deg, transparent 48%, rgba(139, 69, 19, 0.01) 49%, rgba(139, 69, 19, 0.01) 51%, transparent 52%);
+    radial-gradient(circle at 20% 20%, rgba(0, 255, 65, 0.02) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(0, 204, 0, 0.01) 0%, transparent 50%),
+    linear-gradient(45deg, transparent 48%, rgba(0, 255, 65, 0.005) 49%, rgba(0, 255, 65, 0.005) 51%, transparent 52%);
   background-size: 100px 100px, 150px 150px, 25px 25px;
   pointer-events: none;
 }
 
 .scroll-content {
   padding: 2rem;
-  color: #2c1810;
+  color: #00ff41;
   position: relative;
   z-index: 1;
 }
@@ -802,17 +868,17 @@ section.animate {
 /* Small Scroll Containers for Projects */
 .scroll-cylinder-small {
   height: 20px;
-  background: linear-gradient(to bottom, #8B4513 0%, #654321 50%, #8B4513 100%);
+  background: linear-gradient(to bottom, #003300 0%, #002200 50%, #003300 100%);
   border-radius: 10px;
   margin-bottom: 5px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 8px rgba(0, 255, 65, 0.3);
 }
 
 .scroll-paper-small {
-  background: linear-gradient(to bottom, #f4f1e8 0%, #ebe3d5 50%, #dccdb1 100%);
-  border: 1px solid #c9b037;
+  background: linear-gradient(to bottom, #001a00 0%, #000d00 50%, #000300 100%);
+  border: 1px solid #00ff41;
   border-radius: 8px;
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 15px rgba(0, 255, 65, 0.2);
 }
 
 .scroll-paper-small .scroll-content {
@@ -827,10 +893,23 @@ section.animate {
 }
 
 .project-item {
-  border: 1px solid rgba(218, 165, 32, 0.2);
-  border-radius: 10px;
+  border: 2px solid rgba(0, 255, 65, 0.3);
+  border-radius: 12px;
   overflow: hidden;
-  background: rgba(26, 15, 10, 0.3);
+  background: linear-gradient(145deg, rgba(0, 26, 0, 0.8), rgba(0, 13, 0, 0.6));
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(0, 255, 65, 0.05);
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+.project-item:hover {
+  border-color: #00ff41;
+  box-shadow: 
+    0 8px 25px rgba(0, 0, 0, 0.4),
+    0 0 30px rgba(0, 255, 65, 0.15);
+  transform: translateX(5px);
 }
 
 .project-header {
@@ -838,22 +917,23 @@ section.animate {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.2rem;
-  background: rgba(44, 24, 16, 0.6);
+  padding: 1.5rem;
+  background: rgba(0, 13, 0, 0.7);
   border: none;
-  color: #e8dcc0;
+  color: #33ff33;
   cursor: pointer;
   transition: all 0.3s ease;
+  border-bottom: 1px solid rgba(0, 255, 65, 0.1);
 }
 
 .project-header:hover {
-  background: rgba(44, 24, 16, 0.8);
-  color: #daa520;
+  background: rgba(0, 13, 0, 0.8);
+  color: #00ff41;
 }
 
 .project-header.expanded {
-  background: rgba(218, 165, 32, 0.2);
-  color: #daa520;
+  background: rgba(0, 255, 65, 0.2);
+  color: #00ff41;
 }
 
 .project-icon {
@@ -866,28 +946,29 @@ section.animate {
   text-align: left;
   font-weight: 600;
   font-size: 1.1rem;
-  font-family: 'Cinzel', serif;
-  letter-spacing: 0.5px;
+  font-family: 'Fira Code', monospace;
+  letter-spacing: 1px;
 }
 
 .project-status {
   padding: 0.3rem 0.8rem;
-  border-radius: 15px;
+  border-radius: 5px;
   font-size: 0.9rem;
   font-weight: 600;
   margin-right: 1rem;
+  font-family: 'Fira Code', monospace;
 }
 
 .project-status.completed {
-  background: rgba(50, 205, 50, 0.2);
-  color: #32cd32;
-  border: 1px solid rgba(50, 205, 50, 0.3);
+  background: rgba(0, 255, 65, 0.2);
+  color: #00ff41;
+  border: 1px solid rgba(0, 255, 65, 0.4);
 }
 
 .project-status.ongoing {
-  background: rgba(255, 140, 0, 0.2);
-  color: #ff8c00;
-  border: 1px solid rgba(255, 140, 0, 0.3);
+  background: rgba(255, 165, 0, 0.2);
+  color: #ffa500;
+  border: 1px solid rgba(255, 165, 0, 0.4);
 }
 
 .project-arrow {
@@ -905,64 +986,66 @@ section.animate {
 }
 
 .project-details {
-  background: rgba(244, 241, 232, 0.95);
-  color: #2c1810;
+  background: rgba(0, 26, 0, 0.95);
+  color: #33ff33;
   border-radius: 12px;
-  padding: 1.5rem;
-  margin: 1rem 0;
-  border: 1px solid rgba(218, 165, 32, 0.2);
-  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  margin: 1rem;
+  border: 1px solid rgba(0, 255, 65, 0.3);
+  box-shadow: 
+    inset 0 2px 8px rgba(0, 0, 0, 0.3),
+    0 4px 15px rgba(0, 255, 65, 0.1);
 }
 
 .project-details-inner {
-  background: rgba(244, 241, 232, 0.95);
-  color: #2c1810;
+  background: rgba(0, 26, 0, 0.95);
+  color: #33ff33;
   border-radius: 8px;
 }
 
-.war-arsenal {
-  background: linear-gradient(145deg, rgba(139, 69, 19, 0.8), rgba(160, 82, 45, 0.6));
-  color: #f4f1e8;
+.tech-used {
+  background: linear-gradient(145deg, rgba(0, 102, 0, 0.8), rgba(0, 77, 0, 0.6));
+  color: #00ff41;
   padding: 0.8rem 1.5rem;
-  border-radius: 25px;
+  border-radius: 8px;
   font-weight: 700;
   font-size: 0.95rem;
   margin-bottom: 1.2rem;
   display: inline-block;
-  border: 2px solid rgba(218, 165, 32, 0.6);
+  border: 2px solid rgba(0, 255, 65, 0.4);
   box-shadow: 
-    inset 0 2px 4px rgba(255, 255, 255, 0.1),
-    inset 0 -2px 4px rgba(0, 0, 0, 0.2),
-    0 4px 8px rgba(0, 0, 0, 0.15);
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-  font-family: 'Cinzel', serif;
-  letter-spacing: 0.5px;
+    inset 0 2px 4px rgba(0, 255, 65, 0.1),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.3),
+    0 4px 8px rgba(0, 0, 0, 0.2),
+    0 0 10px rgba(0, 255, 65, 0.2);
+  font-family: 'Fira Code', monospace;
+  letter-spacing: 1px;
   position: relative;
   overflow: hidden;
 }
 
-.war-arsenal::before {
+.tech-used::before {
   content: '';
   position: absolute;
   top: 0;
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.2), transparent);
   transition: left 0.5s ease;
 }
 
-.war-arsenal:hover::before {
+.tech-used:hover::before {
   left: 100%;
 }
 
 .project-description {
-  color: #4a3728;
+  color: #33ff33;
   line-height: 1.7;
   margin-bottom: 1.5rem;
-  font-family: 'EB Garamond', serif;
+  font-family: 'Fira Code', monospace;
   font-size: 1.05rem;
-  font-weight: 400;
+  font-weight: 300;
 }
 
 .project-links {
@@ -981,44 +1064,50 @@ section.animate {
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  font-family: 'Cinzel', serif;
-  letter-spacing: 0.5px;
+  font-family: 'Fira Code', monospace;
+  letter-spacing: 1px;
 }
 
 .project-links .btn-primary {
-  background: linear-gradient(45deg, #8B4513, #A0522D);
-  color: white;
+  background: linear-gradient(45deg, #00cc00, #00ff41);
+  color: #001a00;
+  box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
 }
 
 .project-links .btn-primary:hover {
-  background: linear-gradient(45deg, #A0522D, #CD853F);
+  background: linear-gradient(45deg, #00ff41, #33ff33);
   transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
 }
 
 .project-links .btn-secondary {
   background: transparent;
-  color: #8B4513;
-  border: 2px solid #8B4513;
+  color: #00ff41;
+  border: 2px solid #00ff41;
 }
 
 .project-links .btn-secondary:hover {
-  background: rgba(139, 69, 19, 0.1);
+  background: rgba(0, 255, 65, 0.1);
+  box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
 }
 
 /* Contact Section */
 .contact {
-  background: linear-gradient(135deg, rgba(26, 15, 10, 0.9) 0%, rgba(44, 24, 16, 0.7) 100%);
+  background: linear-gradient(135deg, rgba(0, 26, 0, 0.9) 0%, rgba(0, 13, 0, 0.7) 100%);
   border-radius: 20px;
   margin: 2rem;
   padding: 4rem 2rem;
-  border: 2px solid rgba(218, 165, 32, 0.2);
+  border: 2px solid rgba(0, 255, 65, 0.2);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 40px rgba(0, 255, 65, 0.1),
+    inset 0 1px 0 rgba(0, 255, 65, 0.1);
 }
 
 .contact-description {
   text-align: center;
   font-size: 1.2rem;
-  color: #c9b037;
+  color: #33ff33;
   margin-bottom: 3rem;
   max-width: 600px;
   margin-left: auto;
@@ -1027,10 +1116,10 @@ section.animate {
 
 .social-title {
   font-size: 1.8rem;
-  color: #daa520;
+  color: #00ff41;
   text-align: center;
   margin-bottom: 2rem;
-  font-family: 'Cinzel', serif;
+  font-family: 'Fira Code', monospace;
   font-weight: 600;
 }
 
@@ -1046,29 +1135,37 @@ section.animate {
   display: flex;
   align-items: center;
   padding: 1.5rem;
-  background: rgba(44, 24, 16, 0.8);
-  border: 2px solid rgba(218, 165, 32, 0.3);
+  background: linear-gradient(145deg, rgba(0, 26, 0, 0.9), rgba(0, 13, 0, 0.7));
+  border: 2px solid rgba(0, 255, 65, 0.3);
   border-radius: 15px;
   transition: all 0.3s ease;
   cursor: pointer;
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(0, 255, 65, 0.1),
+    inset 0 1px 0 rgba(0, 255, 65, 0.1);
 }
 
 .social-link:hover {
-  transform: translateY(-5px);
-  border-color: #daa520;
-  background: rgba(44, 24, 16, 0.9);
-  box-shadow: 0 10px 25px rgba(218, 165, 32, 0.2);
+  transform: translateY(-8px) scale(1.02);
+  border-color: #00ff41;
+  background: linear-gradient(145deg, rgba(0, 39, 0, 1), rgba(0, 26, 0, 0.9));
+  box-shadow: 
+    0 15px 40px rgba(0, 255, 65, 0.4),
+    0 0 30px rgba(0, 255, 65, 0.3),
+    inset 0 1px 0 rgba(0, 255, 65, 0.2);
 }
 
 .social-icon {
-  background: linear-gradient(45deg, #daa520, #ffd700);
+  background: linear-gradient(45deg, #00cc00, #00ff41);
   border-radius: 50%;
   padding: 1rem;
   margin-right: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #1a0f0a;
+  color: #001a00;
+  box-shadow: 0 0 15px rgba(0, 255, 65, 0.5);
 }
 
 .social-info {
@@ -1077,23 +1174,26 @@ section.animate {
 }
 
 .social-text {
-  color: #daa520;
+  color: #00ff41;
   font-weight: 600;
   margin-bottom: 0.3rem;
+  font-family: 'Fira Code', monospace;
 }
 
 .social-handle {
-  color: #c9b037;
+  color: #33ff33;
   font-size: 0.9rem;
+  font-family: 'Fira Code', monospace;
 }
 
 /* Footer */
 .footer {
-  background: rgba(26, 15, 10, 0.9);
-  color: #c9b037;
+  background: rgba(0, 26, 0, 0.9);
+  color: #33ff33;
   text-align: center;
   padding: 2rem;
-  border-top: 2px solid rgba(218, 165, 32, 0.2);
+  border-top: 2px solid rgba(0, 255, 65, 0.2);
+  font-family: 'Fira Code', monospace;
 }
 
 /* Responsive Design */
@@ -1112,12 +1212,8 @@ section.animate {
     flex-direction: column;
     align-items: center;
   }
-  
-  .container {
-    padding: 0 1rem;
-  }
-  
-  .arsenal-grid {
+
+  .skills-grid {
     grid-template-columns: 1fr;
   }
   
@@ -1125,13 +1221,8 @@ section.animate {
     grid-template-columns: 1fr;
   }
   
-  .weapon-tags {
+  .tech-tags {
     gap: 0.5rem;
-  }
-  
-  .weapon-tag {
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
   }
   
   .section-toggle {
@@ -1143,9 +1234,24 @@ section.animate {
     padding: 1rem;
     font-size: 1rem;
   }
-  
+
   .project-links {
     flex-direction: column;
+  }
+
+  .skills, .projects-overview, .contact {
+    margin: 1rem;
+    padding: 2rem 1rem;
+  }
+  
+  .education-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .college-logo {
+    width: 80px;
+    height: 80px;
   }
 }
 
@@ -1162,7 +1268,7 @@ section.animate {
     font-size: 2.5rem;
   }
   
-  .arsenal, .campaigns-overview, .contact {
+  .about, .contact {
     margin: 1rem;
     padding: 2rem 1rem;
   }
