@@ -1,11 +1,16 @@
 :root {
-  font-family: 'Fira Code', 'JetBrains Mono', monospace;
-  line-height: 1.5;
-  font-weight: 400;
+  --paper: #f6f2ea;
+  --paper-raise: #fbf8f1;
+  --ink: #1b1814;
+  --muted: #5c554c;
+  --hairline: #e1dacd;
+  --crimson: #c2332a;
+  --forest: #2f6b4f;
 
-  color-scheme: dark;
-  color: #00ff41;
-  background-color: #000500;
+  --display: 'Spectral', 'Tiro Devanagari Hindi', Georgia, serif;
+  --devanagari: 'Tiro Devanagari Hindi', 'Noto Serif Devanagari', serif;
+  --body: 'Figtree', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -15,13 +20,22 @@
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background: #000500;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  line-height: 1.6;
+  overflow-x: hidden;
 }
 
 #root {
@@ -29,102 +43,77 @@ body {
   min-height: 100vh;
 }
 
-a {
-  font-weight: 500;
-  color: #00ff41;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #33ff33;
-}
-
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0;
   line-height: 1.2;
-  font-family: 'Fira Code', monospace;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  font-weight: 600;
 }
 
 p {
   margin: 0;
 }
 
+a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: 'Fira Code', monospace;
-  background-color: #001a00;
-  color: #00ff41;
+  font-family: inherit;
+  color: inherit;
+  background: none;
+  border: none;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #00ff41;
-  box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
-}
-button:focus,
-button:focus-visible {
-  outline: 2px solid #00ff41;
 }
 
-/* Smooth scrolling for anchor links */
-html {
-  scroll-behavior: smooth;
+img,
+svg {
+  display: block;
+  max-width: 100%;
 }
 
-/* Custom scrollbar */
+::selection {
+  background: var(--crimson);
+  color: var(--paper);
+}
+
+:focus-visible {
+  outline: 2px solid var(--crimson);
+  outline-offset: 2px;
+}
+
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #001a00;
+  background: var(--paper);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #00ff41;
-  border-radius: 4px;
-  box-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
+  background: #c9c0b0;
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #33ff33;
-  box-shadow: 0 0 10px rgba(0, 255, 65, 0.8);
+  background: var(--muted);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
